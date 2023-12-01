@@ -9,7 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 # 데이터셋 불러오기
 file_path = 'C:/Users/rkddn/OneDrive/바탕 화면/archive/STRIKE_REPORTS.csv'
 bird_strike_data = pd.read_csv(file_path) 
-bird_strike_data = bird_strike_data.dropna(subset=['TIME_OF_DAY'])
+bird_strike_data = bird_strike_data.dropna(subset=['TIME_OF_DAY']).reset_index(drop=True) # 인덱스 재설정 포함 
 # 원-핫 인코딩으로 범주형 데이터 변환
 encoder = OneHotEncoder()
 time_of_day_encoded = encoder.fit_transform(bird_strike_data[['TIME_OF_DAY']]).toarray()
