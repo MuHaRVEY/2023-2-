@@ -6,7 +6,7 @@ import seaborn as sns
 import pandas as pd
 
 # 데이터셋 불러오기
-file_path = '바탕 화면/archive/STRIKE_REPORTS.csv' #사적인 절대 경로는 부분 생략했습니다. 
+file_path = 'C:/Users/rkddn/OneDrive/바탕 화면/archive/STRIKE_REPORTS.csv'
 bird_strike_data = pd.read_csv(file_path)
 
 # 데이터셋의 첫 몇 줄을 출력하여 구조 확인
