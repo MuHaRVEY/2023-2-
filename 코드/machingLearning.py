@@ -27,7 +27,10 @@ bird_strike_data['INCIDENT_MONTH'] = bird_strike_data['INCIDENT_DATE'].dt.month
 
 # 타겟 변수 정의 (DAMAGE 열 존재 여부를 바탕으로)
 # INDICATED_DAMAGE 열을 이진 타입(0과 1)으로 변환
-bird_strike_data['STRIKE_OCCURRED'] = bird_strike_data['INDICATED_DAMAGE'].notnull().astype(int) 
+bird_strike_data['STRIKE_OCCURRED'] = bird_strike_data['INDICATED_DAMAGE'].astype(int) #notnull()로 인해 모두 True로 바뀐듯함. 
+#  File "c:\Users\rkddn\OneDrive\바탕 화면\archive\#머신러닝 모델 만들기.py", line 44, in <module>
+#    model.fit(X_train, y_train)
+# notnull()을 삭제해줌으로써 해당 오류를 해결하였음.
 
 # 모델에 사용할 특성 선택
 X = pd.concat([time_of_day_encoded_df, bird_strike_data[['INCIDENT_YEAR', 'INCIDENT_MONTH']]], axis=1)
