@@ -75,6 +75,47 @@ plt.title('Bird Strikes by Bird Size')
 plt.xlabel('Bird Size')
 plt.ylabel('Number of Incidents')
 
-# 레이아웃 조정
+
+#코드 추가 버드 스타라이킹 발생 평균 속도 구하기
+bird_strike_data['SPEED'] = pd.to_numeric(bird_strike_data['SPEED'], errors='coerce')
+bird_strike_data_speed = bird_strike_data.dropna(subset=['SPEED'])
+
+speed_incidents_count = bird_strike_data_speed.groupby('SPEED').size()
+speed_incidents_mean = bird_strike_data_speed.groupby('SPEED')['SPEED'].mean()
+
+plt.figure(figsize=(15, 6))
+
+sns.lineplot(x=speed_incidents_count.index, y=speed_incidents_count.values, label='Number of Incidents')
+
+sns.lineplot(x=speed_incidents_mean.index, y=speed_incidents_mean.values, label='Average Speed')
+
+plt.title('Bird Strikes Analysis by Aircraft Speed')
+plt.xlabel('Speed (knots)')
+plt.ylabel('Count / Average Speed')
+plt.xticks(rotation=45)
+plt.legend()
+
+#고도 관련 코드 추가 
+bird_strike_data['HEIGHT'] = pd.to_numeric(bird_strike_data['HEIGHT'], errors='coerce')
+bird_strike_data_height = bird_strike_data.dropna(subset=['HEIGHT'])
+
+height_incidents_sum = bird_strike_data_height.groupby('HEIGHT')['HEIGHT'].sum()
+height_incidents_mean = bird_strike_data_height.groupby('HEIGHT')['HEIGHT'].mean()
+
+plt.figure(figsize=(15, 6))
+
+sns.lineplot(x=height_incidents_sum.index, y=height_incidents_sum.values, label='Sum of Incidents')
+
+sns.lineplot(x=height_incidents_mean.index, y=height_incidents_mean.values, label='Average Height')
+
+plt.title('Bird Strikes Analysis by Aircraft Height')
+plt.xlabel('Height (feet)')
+plt.ylabel('Sum of Incidents / Average Height')
+plt.xticks(rotation=45)
+plt.legend()
+
+#레이아웃 조정 
 plt.tight_layout()
 plt.show()
+
+
